@@ -321,7 +321,7 @@ window.loadMats=async function(grade,subj,mt){
   snap.forEach(d=>{
     const m=d.data();
     const el=document.createElement('div');el.className='fitem';
-    el.innerHTML=`<div><div class="fitem-nm">📄 ${m.name}</div><div class="fitem-meta">By ${m.uploaderName} · ${m.fileName}</div></div><div class="facts"><button class="fbtn v" onclick="viewPDF('${m.url}','${m.name}')">View</button><a class="fbtn" href="${m.url}" download="${m.fileName}" target="_blank">Download</a></div>`;
+    el.innerHTML=`<div><div class="fitem-nm">📄 ${m.name}</div><div class="fitem-meta">By ${m.uploaderName} · ${m.fileName}</div></div><div class="facts"><button class="fbtn v" onclick="viewPDF('${m.url}','${m.name}')">Open ↗</button><a class="fbtn" href="${m.url}" download="${m.fileName}" target="_blank">Download</a></div>`;
     list.appendChild(el);
   });
 };
@@ -601,11 +601,7 @@ function selType(t){
   loadMats(_g,_s,_t);
 }
 function viewPDF(url,name){
-  document.getElementById('pdfTitle').textContent=name;
-  // Use Google Docs viewer to display PDFs from external URLs
-  const viewerUrl='https://docs.google.com/viewer?embedded=true&url='+encodeURIComponent(url);
-  document.getElementById('pdfFrame').src=viewerUrl;
-  document.getElementById('pdfModal').classList.add('on');
+  window.open(url,'_blank');
 }
 function closePDF(){
   document.getElementById('pdfModal').classList.remove('on');
